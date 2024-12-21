@@ -65,10 +65,12 @@ impl GridFunction {
     ///
     /// Example use case: todo: add example use case.
     ///
-    pub fn new_grid_function<F>(grid: Grid, func: F) -> Self
+    pub fn new_grid_function<F>(grid: &Grid, func: F) -> Self
     where
         F: Fn(f64) -> f64,
     {
+        let grid = grid.clone();
+
         // Creates a vector containing the value of func at each grid point.
         let function_values: Vec<f64> =
             grid.grid_points.iter().map(|&x| func(x)).collect();
@@ -86,7 +88,9 @@ impl GridFunction {
     ///
     /// Example use case: todo: add example use case.
     ///
-    pub fn new_constant_grid_function(grid: Grid, scalar: f64) -> Self {
+    pub fn new_constant_grid_function(grid: &Grid, scalar: f64) -> Self {
+        let grid = grid.clone();
+
         let function_values: Vec<f64> =
             grid.grid_points.iter().map(|_| scalar).collect();
 
@@ -105,7 +109,7 @@ impl GridFunction {
     ///
     /// Example use case: todo: add example use case.
     ///
-    pub fn grid_function_add(
+    pub fn grid_function_addition(
         grid_function_1: &GridFunction,
         grid_function_2: &GridFunction,
     ) -> Self {
@@ -149,7 +153,7 @@ impl GridFunction {
     ///
     /// Example use case: todo: add example use case.
     ///
-    pub fn grid_function_subtract(
+    pub fn grid_function_subtraction(
         grid_function_1: &GridFunction,
         grid_function_2: &GridFunction,
     ) -> Self {
@@ -193,7 +197,7 @@ impl GridFunction {
     ///
     /// Example use case: todo: add example use case.
     ///
-    pub fn grid_function_multiply(
+    pub fn grid_function_multiplication(
         grid_function_1: &GridFunction,
         grid_function_2: &GridFunction,
     ) -> Self {
